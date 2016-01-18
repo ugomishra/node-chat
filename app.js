@@ -6,7 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var auth_info = require('./lib/credentials');
+
 var redis_store = require('connect-redis')(session);
+
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
@@ -24,6 +26,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser(auth_info.sess_secret));
+app.use(cookieParser());
+
 app.use(session(
 {
 	secret : auth_info.sess_secret,
