@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var auth_info = require('./lib/credentials');
-
 var redis_store = require('connect-redis')(session);
 
 
@@ -34,9 +33,7 @@ app.use(session(
 	resave : true,
 	saveUninitialized: true,
 	store: new redis_store({
-		url: 'pub-redis-16263.us-east-1-3.1.ec2.garantiadata.com',
-		port: 16263,
-		pass: 'black@123'
+		url: 'redis://localhost'
 	})
 }
 ));
