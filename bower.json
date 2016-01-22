@@ -1,0 +1,28 @@
+{
+  "name": "nodechat",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ugomishra/node-chat",
+  "authors": [
+    "ugomishra@gmail.com"
+  ],
+  "description": "A chat app using redis",
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "chat",
+    "redis"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.0"
+  }
+}

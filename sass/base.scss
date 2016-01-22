@@ -1,0 +1,22 @@
+.chat-template{
+	#rooms,#chat,#users{
+		height: 400px;
+		border: 1px solid #000;
+		list-style:none;
+	}
+	.rooms {
+		margin-left:8.3%;
+	}
+	#chat{
+			position:relative;
+		.input-box{
+			position:absolute;
+			bottom:0;
+			left:0;
+			width:100%;
+			textarea{
+				width:100%;
+			}
+		}
+	}
+}

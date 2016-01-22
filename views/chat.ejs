@@ -4,16 +4,43 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/base.css' />
   </head>
-  <body>
+  <body class="chat-template">
+  <% include ../partials/header %>
   <div class="row">
   <div class="container">
   <div class="col-sm-12">
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h5><%= title %></h5>
+    <div class="row">
+      <div class="col-sm-2 col-sm-offset-1 rooms">
+        <h3>Rooms</h3>
+        <button id="croom">Create Room</button>
+        <ul id="rooms">
+          <li></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 chat">
+        <h3>Chat Area</h3>
+        <div id="chat">
+          <div class="input-box">
+            <textarea id="input-text">
+              
+            </textarea><button id="post-text">Enter</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2 users">
+        <h3>Users</h3>
+        <ul id="users">
+          <li></li>
+        </ul>        
+      </div>
+    </div>
   </div>
   </div>
 </div>	
+  <% include ../partials/chat_script %>
   </body>
 </html>
 

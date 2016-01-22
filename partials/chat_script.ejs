@@ -1,0 +1,62 @@
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+        	  var socket = io.connect('http://localhost:3000');
+				  socket.on('joined', function (data) {
+				    $('#users').append('<li>' + data.user + '</li>' + '<button scid=' + data.socket_id + '>Ping</button>');
+				    $('#chat').append('<span>' + data.user + ' joined </span>');
+				    socket.emit('onChat', { uid:data.user});
+				  });
+				  socket.on('left',function(data){
+				  	console.log("User left " + data.user + "what");
+				  	$("#users li:contains("+ data.user +")").remove();
+				  	$("#chat li:contains("+ data.user +")").remove();
+				    $('#chat').append('<span>' + data.user + ' left </span>');
+				  });
+				  socket.on('rcprivate',function(data){
+				  	console.log(data.username + "has pinged");
+				  })
+				  $('#users').on("click",'button',function(){
+				  		var psid = $(this).attr("scid");
+				  		socket.emit('private',{scid: psid });	
+				  })
+				  $('#croom').click(function(){
+				  	$(this).parent('.rooms').append("<input type=\"text\" class=\"froom\" placeholder=\"name of room\"/><button id=\"create\">Create</button>");
+				  	$('.rooms').on("click",'#create',function(){
+				  		console.log("Plz create");
+				  		var rname = $('.froom').val();				  		
+				  		socket.emit('createroom',{roomId: rname});
+				  		socket.on('rcreated',function(data){
+				  			$('.rooms').find('.froom,#create').remove();
+				  			$('.rooms').find('ul').append('<li>'+rname+'</li>');
+				  			var newRoom = new CreatRoom(io,rname);
+				  			newRoom.f1();
+				  		})
+				  	})
+				  })
+				  socket.on('somecreated',function(data){
+				  		console.log('A room was created');
+				  })
+
+				  function CreatRoom(io,roomname){
+				  	this.io = io;
+				  	this.roomname = roomname;
+				  	this.socket = this.io.connect('http://localhost:3000/'+this.roomname);
+				  	
+				  	this.f1 = function f1(){
+				  	return this.socket.on('joined', function (data) {
+				  	var that = this;
+				    $('#users').append('<li>' + data.user + '</li>' + '<button scid=' + data.socket_id + '>Ping</button>');
+				    $('#chat').append('<span>' + data.user + ' joined </span>');
+				    that.socket.emit('onChat', { uid:data.user});
+				  	});
+				  	}
+
+				  this.socket.on('left',function(data){
+				  	console.log("User left " + data.user + "what");
+				  	$("#users li:contains("+ data.user +")").remove();
+				  	$("#chat li:contains("+ data.user +")").remove();
+				    $('#chat').append('<span>' + data.user + ' left </span>');
+				  });
+				  }
+        </script>

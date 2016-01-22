@@ -4,9 +4,10 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var impServ = require('../app');
+var server = impServ.httpServer;
+var app = impServ.app;
 var debug = require('debug')('nodechat:server');
-var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -18,8 +19,6 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
-var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
