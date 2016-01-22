@@ -1,3 +1,7 @@
 node_modules
 lib/credentials.js
+config.js
+.tmp
+.sass-cache
+bower_components
 
